@@ -121,7 +121,7 @@ validate_domain() {
 # Запрос домена
 while true; do
     echo -e "${YELLOW}Введите домен для n8n (например: n8n.example.com):${NC}"
-    read -p "Домен: " N8N_DOMAIN
+    read -p "Домен: " N8N_DOMAIN < /dev/tty
     
     if [ -z "$N8N_DOMAIN" ]; then
         echo -e "${RED}Домен не может быть пустым!${NC}"
@@ -141,7 +141,7 @@ while true; do
     if [ -z "$DOMAIN_IP" ]; then
         echo -e "${RED}Внимание: Домен $N8N_DOMAIN не резолвится!${NC}"
         echo -e "${YELLOW}Убедитесь, что DNS запись указывает на этот сервер.${NC}"
-        read -p "Продолжить все равно? (yes/no): " CONTINUE
+        read -p "Продолжить все равно? (yes/no): " CONTINUE  < /dev/tty
         if [ "$CONTINUE" != "yes" ]; then
             continue
         fi
@@ -157,7 +157,7 @@ echo ""
 # Запрос email
 while true; do
     echo -e "${YELLOW}Введите email для уведомлений Let's Encrypt:${NC}"
-    read -p "Email: " SSL_EMAIL
+    read -p "Email: " SSL_EMAIL  < /dev/tty
     
     if [ -z "$SSL_EMAIL" ]; then
         echo -e "${RED}Email не может быть пустым!${NC}"
@@ -176,7 +176,7 @@ echo ""
 
 # Запрос таймзоны
 echo -e "${YELLOW}Введите таймзону (по умолчанию: Europe/Moscow):${NC}"
-read -p "Таймзона: " TIMEZONE
+read -p "Таймзона: " TIMEZONE  < /dev/tty
 TIMEZONE=${TIMEZONE:-Europe/Moscow}
 
 echo ""
@@ -186,7 +186,7 @@ echo -e "${YELLOW}Выберите тип базы данных:${NC}"
 echo "1) PostgreSQL (рекомендуется для продакшена)"
 echo "2) SQLite (проще для тестирования)"
 echo ""
-read -p "Выберите (1 или 2): " DB_CHOICE
+read -p "Выберите (1 или 2): " DB_CHOICE < /dev/tty
 
 case $DB_CHOICE in
     1)
@@ -195,14 +195,14 @@ case $DB_CHOICE in
         
         # Настройки PostgreSQL
         echo -e "${YELLOW}Настройки PostgreSQL:${NC}"
-        read -p "Имя базы данных (по умолчанию: n8n): " POSTGRES_DB
+        read -p "Имя базы данных (по умолчанию: n8n): " POSTGRES_DB  < /dev/tty
         POSTGRES_DB=${POSTGRES_DB:-n8n}
         
-        read -p "Пользователь базы данных (по умолчанию: n8n): " POSTGRES_USER
+        read -p "Пользователь базы данных (по умолчанию: n8n): " POSTGRES_USER < /dev/tty
         POSTGRES_USER=${POSTGRES_USER:-n8n}
         
         while true; do
-            read -s -p "Пароль для базы данных: " POSTGRES_PASSWORD
+            read -s -p "Пароль для базы данных: " POSTGRES_PASSWORD < /dev/tty
             echo ""
             if [ -z "$POSTGRES_PASSWORD" ]; then
                 echo -e "${RED}Пароль не может быть пустым!${NC}"
@@ -244,7 +244,7 @@ if [ "$DB_TYPE" = "postgresdb" ]; then
 fi
 echo ""
 
-read -p "Продолжить установку? (yes/no): " CONFIRM
+read -p "Продолжить установку? (yes/no): " CONFIRM < /dev/tty
 if [ "$CONFIRM" != "yes" ]; then
     echo -e "${YELLOW}Установка отменена.${NC}"
     exit 0
