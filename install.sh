@@ -83,7 +83,7 @@ echo -e "${BLUE}Следуйте инструкциям на экране.${NC}"
 echo ""
 
 # Запуск с принудительной интерактивностью
-bash -i -c './setup-interactive.sh'
+./setup-interactive.sh
 
 echo ""
 echo -e "${GREEN}================================================${NC}"
