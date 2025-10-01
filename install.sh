@@ -32,19 +32,19 @@ if ! sudo -n true 2>/dev/null; then
 fi
 
 # Создание временной директории
-TEMP_DIR=$(mktemp -d)
-echo -e "${YELLOW}Создание временной директории: ${TEMP_DIR}${NC}"
+OPT_DIR=$(mkdir -p /opt/n8n)
+echo -e "${YELLOW}Создание временной директории: ${OPT_DIR}${NC}"
 
 # Функция очистки при выходе
 cleanup() {
     echo -e "${YELLOW}Очистка временных файлов...${NC}"
-    rm -rf "$TEMP_DIR"
+    rm -rf "$OPT_DIR"
 }
 trap cleanup EXIT
 
 # Клонирование репозитория
 echo -e "${YELLOW}Клонирование репозитория n8n...${NC}"
-cd "$TEMP_DIR"
+cd "$OPT_DIR"
 
 # Проверка наличия git
 if ! command -v git &> /dev/null; then
@@ -57,13 +57,13 @@ fi
 REPO_URL="https://github.com/chapov/n8n-installator.git"
 echo -e "${BLUE}Клонирование из: ${REPO_URL}${NC}"
 
-if ! git clone "$REPO_URL" n8n-ssl-installer; then
+if ! git clone "$REPO_URL" n8n; then
     echo -e "${RED}Ошибка клонирования репозитория!${NC}"
     echo -e "${YELLOW}Проверьте URL репозитория и доступность интернета.${NC}"
     exit 1
 fi
 
-cd n8n-ssl-installer
+cd n8n
 
 # Проверка наличия интерактивного скрипта
 if [ ! -f "setup-interactive.sh" ]; then
