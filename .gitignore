@@ -1,0 +1,28 @@
+# Environment variables
+.env
+
+# SSL certificates and certbot data
+certbot/
+
+# n8n local files
+local-files/
+
+# Logs
+*.log
+nginx/*.log
+
+# Backups
+*.sql
+*.tar.gz
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
