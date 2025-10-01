@@ -82,7 +82,8 @@ echo -e "${YELLOW}Запуск интерактивного скрипта ус�
 echo -e "${BLUE}Следуйте инструкциям на экране.${NC}"
 echo ""
 
-bash -i ./setup-interactive.sh
+exec < /dev/tty
+bash ./setup-interactive.sh
 
 echo ""
 echo -e "${GREEN}================================================${NC}"
