@@ -109,12 +109,9 @@ validate_email() {
 # Функция для проверки валидности домена
 validate_domain() {
     local domain=$1
-    # Простая проверка домена - только базовые символы
+    # Очень простая проверка - только базовые символы и длина
     if [[ $domain =~ ^[a-zA-Z0-9.-]+$ ]] && [[ ${#domain} -ge 3 ]] && [[ ${#domain} -le 253 ]]; then
-        # Проверяем, что домен не начинается и не заканчивается точкой или дефисом
-        if [[ $domain =~ ^[a-zA-Z0-9] ]] && [[ $domain =~ [a-zA-Z0-9]$ ]]; then
-            return 0
-        fi
+        return 0
     fi
     return 1
 }
@@ -132,9 +129,10 @@ while true; do
     fi
     
     if ! validate_domain "$N8N_DOMAIN"; then
-        echo -e "${RED}Неверный формат домена!${NC}"
+        echo -e "${RED}Неверный формат домена: '$N8N_DOMAIN'${NC}"
         echo -e "${YELLOW}Домен должен содержать только буквы, цифры, точки и дефисы.${NC}"
         echo -e "${YELLOW}Примеры: n8n.example.com, my-n8n.domain.org${NC}"
+        echo -e "${BLUE}Длина домена: ${#N8N_DOMAIN} символов${NC}"
         continue
     fi
     
