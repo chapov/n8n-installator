@@ -109,12 +109,22 @@ validate_email() {
 # Функция для проверки валидности домена
 validate_domain() {
     local domain=$1
-    if [[ $domain =~ ^[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]$ ]]; then
-        return 0
-    else
-        return 1
+    # Простая проверка домена - только базовые символы
+    if [[ $domain =~ ^[a-zA-Z0-9.-]+$ ]] && [[ ${#domain} -ge 3 ]] && [[ ${#domain} -le 253 ]]; then
+        # Проверяем, что домен не начинается и не заканчивается точкой или дефисом
+        if [[ $domain =~ ^[a-zA-Z0-9] ]] && [[ $domain =~ [a-zA-Z0-9]$ ]]; then
+            return 0
+        fi
     fi
+    return 1
 }
+
+# Проверка интерактивности
+if [ ! -t 0 ]; then
+    echo -e "${RED}Ошибка: Скрипт запущен в неинтерактивном режиме!${NC}"
+    echo -e "${YELLOW}Запустите скрипт напрямую: ./setup-interactive.sh${NC}"
+    exit 1
+fi
 
 # Запрос домена
 while true; do
@@ -128,6 +138,8 @@ while true; do
     
     if ! validate_domain "$N8N_DOMAIN"; then
         echo -e "${RED}Неверный формат домена!${NC}"
+        echo -e "${YELLOW}Домен должен содержать только буквы, цифры, точки и дефисы.${NC}"
+        echo -e "${YELLOW}Примеры: n8n.example.com, my-n8n.domain.org${NC}"
         continue
     fi
     
