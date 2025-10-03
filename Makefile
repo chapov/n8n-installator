@@ -17,11 +17,10 @@ help: ## Показать справку
 	@echo "  make setup      # Интерактивная настройка"
 	@echo "  make logs       # Просмотр логов n8n"
 
-install: ## Установка через curl (замените USER/REPO на ваш репозиторий)
+install:
 	@echo "$(GREEN)Установка n8n через curl...$(NC)"
-	@echo "$(YELLOW)Замените USER/REPO на ваш GitHub репозиторий!$(NC)"
 	@echo ""
-	@echo "curl -fsSL https://raw.githubusercontent.com/USER/REPO/main/install.sh | bash"
+	@echo "curl -fsSL https://raw.githubusercontent.com/chapov/n8n-installator/main/install.sh | bash"
 
 setup: ## Запуск интерактивного установщика
 	@echo "$(GREEN)Запуск интерактивного установщика...$(NC)"
