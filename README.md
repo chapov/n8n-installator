@@ -54,7 +54,7 @@ cd n8n
 ## Структура проекта
 
 ```
-n8n-ssl/
+n8n/
 ├── install.sh                 # Скрипт установки через curl
 ├── setup-interactive.sh       # Интерактивный установщик
 ├── docker-compose.yaml        # Конфигурация Docker Compose
@@ -73,7 +73,7 @@ n8n будет доступен по адресу: **https://ваш-домен**
 
 ```bash
 # Переход в директорию установки
-cd n8n-ssl
+cd n8n
 
 # Просмотр логов
 docker compose logs -f n8n
@@ -153,17 +153,10 @@ n8n использует лицензию [Fair-code](https://faircode.io/) с �
 
 ## Ссылки для установки
 
-**Замените `chapov/n8n-installator` на ваш GitHub репозиторий:**
-
 ```bash
 # Установка через curl
 curl -fsSL https://raw.githubusercontent.com/chapov/n8n-installator/main/install.sh | bash
 
 # Или через wget
 wget -qO- https://raw.githubusercontent.com/chapov/n8n-installator/main/install.sh | bash
-```
-
-**Пример для репозитория `username/n8n-ssl-installer`:**
-```bash
-curl -fsSL https://raw.githubusercontent.com/username/n8n-ssl-installer/main/install.sh | bash
 ```
